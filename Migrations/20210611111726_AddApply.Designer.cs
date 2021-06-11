@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SyaBackend;
 
 namespace SyaBackend.Migrations
 {
     [DbContext(typeof(SyaDbContext))]
-    partial class SyaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210611111726_AddApply")]
+    partial class AddApply
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("WorkId");
 
-                    b.ToTable("Applies");
+                    b.ToTable("Apply");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Favorite", b =>

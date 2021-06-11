@@ -2,51 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SyaBackend;
 
 namespace SyaBackend.Migrations
 {
     [DbContext(typeof(SyaDbContext))]
-    partial class SyaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210611102254_AddBlogCreatedTimestamp")]
+    partial class AddBlogCreatedTimestamp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.7");
-
-            modelBuilder.Entity("SyaBackend.Models.Apply", b =>
-                {
-                    b.Property<int>("ApplyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StudentUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WorkId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ApplyId");
-
-                    b.HasIndex("ResumeId");
-
-                    b.HasIndex("StudentUserId");
-
-                    b.HasIndex("TeacherUserId");
-
-                    b.HasIndex("WorkId");
-
-                    b.ToTable("Applies");
-                });
 
             modelBuilder.Entity("SyaBackend.Models.Favorite", b =>
                 {
@@ -67,24 +38,6 @@ namespace SyaBackend.Migrations
                     b.ToTable("Favorites");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.FavoriteHasWork", b =>
-                {
-                    b.Property<int>("WorkId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FavoriteId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("AddDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("WorkId", "FavoriteId");
-
-                    b.HasIndex("FavoriteId");
-
-                    b.ToTable("FavoriteHasWorks");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Like", b =>
                 {
                     b.Property<int>("WorkId")
@@ -98,50 +51,6 @@ namespace SyaBackend.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Likes");
-                });
-
-            modelBuilder.Entity("SyaBackend.Models.Resume", b =>
-                {
-                    b.Property<int>("ResumeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Academic")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("City")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Community")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Education")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Introduction")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Project")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Skill")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ResumeId");
-
-                    b.HasIndex("StudentId")
-                        .IsUnique();
-
-                    b.ToTable("Resumes");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.User", b =>
@@ -234,33 +143,6 @@ namespace SyaBackend.Migrations
                     b.ToTable("Works");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.Apply", b =>
-                {
-                    b.HasOne("SyaBackend.Models.Resume", "Resume")
-                        .WithMany("Applies")
-                        .HasForeignKey("ResumeId");
-
-                    b.HasOne("SyaBackend.Models.User", "Student")
-                        .WithMany("StudentApplies")
-                        .HasForeignKey("StudentUserId");
-
-                    b.HasOne("SyaBackend.Models.User", "Teacher")
-                        .WithMany("TeacherApplies")
-                        .HasForeignKey("TeacherUserId");
-
-                    b.HasOne("SyaBackend.Models.Work", "Work")
-                        .WithMany("Applies")
-                        .HasForeignKey("WorkId");
-
-                    b.Navigation("Resume");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Teacher");
-
-                    b.Navigation("Work");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Favorite", b =>
                 {
                     b.HasOne("SyaBackend.Models.User", "User")
@@ -268,21 +150,6 @@ namespace SyaBackend.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SyaBackend.Models.FavoriteHasWork", b =>
-                {
-                    b.HasOne("SyaBackend.Models.Favorite", null)
-                        .WithMany("FavoriteHasWorks")
-                        .HasForeignKey("FavoriteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SyaBackend.Models.Work", null)
-                        .WithMany("FavoriteHasWorks")
-                        .HasForeignKey("WorkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Like", b =>
@@ -300,17 +167,6 @@ namespace SyaBackend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.Resume", b =>
-                {
-                    b.HasOne("SyaBackend.Models.User", "Student")
-                        .WithOne("Resume")
-                        .HasForeignKey("SyaBackend.Models.Resume", "StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Work", b =>
                 {
                     b.HasOne("SyaBackend.Models.User", "Teacher")
@@ -320,37 +176,17 @@ namespace SyaBackend.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.Favorite", b =>
-                {
-                    b.Navigation("FavoriteHasWorks");
-                });
-
-            modelBuilder.Entity("SyaBackend.Models.Resume", b =>
-                {
-                    b.Navigation("Applies");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.User", b =>
                 {
                     b.Navigation("Favorites");
 
                     b.Navigation("Likes");
 
-                    b.Navigation("Resume");
-
-                    b.Navigation("StudentApplies");
-
-                    b.Navigation("TeacherApplies");
-
                     b.Navigation("Works");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Work", b =>
                 {
-                    b.Navigation("Applies");
-
-                    b.Navigation("FavoriteHasWorks");
-
                     b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618

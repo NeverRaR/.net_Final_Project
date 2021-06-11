@@ -2,51 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SyaBackend;
 
 namespace SyaBackend.Migrations
 {
     [DbContext(typeof(SyaDbContext))]
-    partial class SyaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210611105309_ChangeResume")]
+    partial class ChangeResume
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.7");
-
-            modelBuilder.Entity("SyaBackend.Models.Apply", b =>
-                {
-                    b.Property<int>("ApplyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StudentUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeacherUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WorkId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ApplyId");
-
-                    b.HasIndex("ResumeId");
-
-                    b.HasIndex("StudentUserId");
-
-                    b.HasIndex("TeacherUserId");
-
-                    b.HasIndex("WorkId");
-
-                    b.ToTable("Applies");
-                });
 
             modelBuilder.Entity("SyaBackend.Models.Favorite", b =>
                 {
@@ -234,33 +205,6 @@ namespace SyaBackend.Migrations
                     b.ToTable("Works");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.Apply", b =>
-                {
-                    b.HasOne("SyaBackend.Models.Resume", "Resume")
-                        .WithMany("Applies")
-                        .HasForeignKey("ResumeId");
-
-                    b.HasOne("SyaBackend.Models.User", "Student")
-                        .WithMany("StudentApplies")
-                        .HasForeignKey("StudentUserId");
-
-                    b.HasOne("SyaBackend.Models.User", "Teacher")
-                        .WithMany("TeacherApplies")
-                        .HasForeignKey("TeacherUserId");
-
-                    b.HasOne("SyaBackend.Models.Work", "Work")
-                        .WithMany("Applies")
-                        .HasForeignKey("WorkId");
-
-                    b.Navigation("Resume");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Teacher");
-
-                    b.Navigation("Work");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Favorite", b =>
                 {
                     b.HasOne("SyaBackend.Models.User", "User")
@@ -325,11 +269,6 @@ namespace SyaBackend.Migrations
                     b.Navigation("FavoriteHasWorks");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.Resume", b =>
-                {
-                    b.Navigation("Applies");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.User", b =>
                 {
                     b.Navigation("Favorites");
@@ -338,17 +277,11 @@ namespace SyaBackend.Migrations
 
                     b.Navigation("Resume");
 
-                    b.Navigation("StudentApplies");
-
-                    b.Navigation("TeacherApplies");
-
                     b.Navigation("Works");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Work", b =>
                 {
-                    b.Navigation("Applies");
-
                     b.Navigation("FavoriteHasWorks");
 
                     b.Navigation("Likes");

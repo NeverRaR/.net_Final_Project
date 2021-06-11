@@ -18,7 +18,7 @@ namespace SyaBackend.Views
 
         public void SetUser(User user)
         {
-            Id=user.Id;
+            Id=user.UserId;
             Email = user.Email;
             Role = user.Role;
             Username = user.Username;

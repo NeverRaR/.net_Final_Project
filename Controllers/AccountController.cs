@@ -77,10 +77,7 @@ namespace SyaBackend.Controllers
         public AccountStatus LoginStatus()
         {
             AccountStatus accountStatus = new AccountStatus();
-            String sessionId = "no sessionId";
-            bool hasSessionId = Request.Cookies.TryGetValue("sessionId",out sessionId);
-            if (!hasSessionId) return accountStatus;
-            User user = RedisHelper.GetUser(sessionId, _dataBase.Users, _redis);
+            User user = RedisHelper.GetUser(Request, _dataBase.Users, _redis);
             if (user == null) return accountStatus;
             accountStatus.SetUser(user);
 
