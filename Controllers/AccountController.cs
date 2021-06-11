@@ -25,22 +25,10 @@ namespace SyaBackend.Controllers
         private readonly SyaDbContext _dataBase;
         private readonly IDatabase _redis;
 
-        public AccountController(SyaDbContext context, RedisHelper client)
+        public AccountController(SyaDbContext context, RedisClient client)
         {
             _dataBase = context;
             _redis = client.GetDatabase();
-        }
-
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
         }
 
         [HttpPost("Register")]
@@ -70,24 +58,18 @@ namespace SyaBackend.Controllers
         public AccountStatus Login([FromBody] LoginDTO request)
         {
             AccountStatus accountStatus = new AccountStatus();
-            var users = _dataBase.Users.Where(x => x.Username == request.Username);
-            if (users.Count() == 0) return accountStatus;
-            User user = users.First();
-            String passwordHashed = HashHelper.ComputeSHA256Hash(request.Password + user.Salt);
-            if (!user.Password.Equals(passwordHashed)) return accountStatus;
-
-            double seed = ThreadLocalRandom.NextDouble();
-            String sessionId = HashHelper.ComputeMD5Hash(user.Username + seed);
-            _redis.StringSet(sessionId, user.Id, new TimeSpan(8, 0, 0));
+            String sessionId = RedisHelper.CreateSessionId(request.Username, request.Password, _dataBase.Users, _redis);
+            if (sessionId == null) return accountStatus;
 
             var cookieOptions= new CookieOptions();
             cookieOptions.Path = "/";
             cookieOptions.HttpOnly = true;
             cookieOptions.MaxAge = new TimeSpan(8, 0, 0);
-
             Response.Cookies.Append("sessionId", sessionId, cookieOptions);
-            accountStatus.SetUser(user);
 
+            User user= RedisHelper.GetUser(sessionId, _dataBase.Users, _redis);
+            if (user == null) return accountStatus;
+            accountStatus.SetUser(user);
             return accountStatus;
         }
 
@@ -98,9 +80,10 @@ namespace SyaBackend.Controllers
             String sessionId = "no sessionId";
             bool hasSessionId = Request.Cookies.TryGetValue("sessionId",out sessionId);
             if (!hasSessionId) return accountStatus;
-            int id = (int) _redis.StringGet(sessionId) ;
-            User user = _dataBase.Users.Find(id);
+            User user = RedisHelper.GetUser(sessionId, _dataBase.Users, _redis);
+            if (user == null) return accountStatus;
             accountStatus.SetUser(user);
+
             return accountStatus;
         }
 

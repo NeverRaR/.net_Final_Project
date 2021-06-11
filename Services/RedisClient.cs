@@ -7,13 +7,13 @@ using StackExchange.Redis;
 
 namespace SyaBackend.Utils
 {
-    public class RedisHelper
+    public class RedisClient
     {
         private string _connectionString; //连接字符串
         private string _instanceName; //实例名称
         private int _defaultDB; //默认数据库
         private ConcurrentDictionary<string, ConnectionMultiplexer> _connections;
-        public RedisHelper(string connectionString, string instanceName, int defaultDB = 0)
+        public RedisClient(string connectionString, string instanceName, int defaultDB = 0)
         {
             _connectionString = connectionString;
             _instanceName = instanceName;

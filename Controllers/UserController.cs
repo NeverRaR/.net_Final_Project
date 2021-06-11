@@ -18,7 +18,7 @@ namespace SyaBackend.Controllers
         private readonly SyaDbContext _context;
         private readonly IDatabase _redis;
 
-        public UserController(SyaDbContext context, RedisHelper client)
+        public UserController(SyaDbContext context, RedisClient client)
         {
             _context = context;
             _redis = client.GetDatabase();
