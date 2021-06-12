@@ -38,8 +38,13 @@ namespace SyaBackend.Models
         public List<Like> Likes { get; set; }
 
         [ForeignKey("WorkId")]
+        public List<Take> Takes { get; set; }
+
+        [ForeignKey("WorkId")]
         public List<FavoriteHasWork> FavoriteHasWorks { get; set; }
 
         public List<Apply> Applies { get; set; }
+
+        public List<LeaveInformation> LeaveInformation { get; set; }
     }
 }

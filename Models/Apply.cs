@@ -13,6 +13,6 @@ namespace SyaBackend.Models
         public Resume Resume { get; set; }
         public User Teacher { get; set; }
 
-        public int Status;
+        public int Status { get; set; }
     }
 }

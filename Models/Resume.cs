@@ -28,7 +28,9 @@ namespace SyaBackend.Models
         public String Skill { get; set; }
 
         public String Introduction { get; set; }
+
         public int StudentId { get; set; }
+
         public User Student { get; set; }
 
         public List<Apply> Applies { get; set; }

@@ -2,60 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SyaBackend;
 
 namespace SyaBackend.Migrations
 {
     [DbContext(typeof(SyaDbContext))]
-    partial class SyaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210612154127_AddTake")]
+    partial class AddTake
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.7");
-
-            modelBuilder.Entity("SyaBackend.Models.Announcement", b =>
-                {
-                    b.Property<int>("AnnouncementId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("sendTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("AnnouncementId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Announcement");
-                });
-
-            modelBuilder.Entity("SyaBackend.Models.AnnouncementSend", b =>
-                {
-                    b.Property<int>("AnnouncementId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AnnouncementId", "ReceiverId");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.ToTable("AnnouncementSend");
-                });
 
             modelBuilder.Entity("SyaBackend.Models.Apply", b =>
                 {
@@ -64,9 +26,6 @@ namespace SyaBackend.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<int?>("StudentUserId")
@@ -128,48 +87,6 @@ namespace SyaBackend.Migrations
                     b.ToTable("FavoriteHasWorks");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.LeaveInformation", b =>
-                {
-                    b.Property<int>("LeaveInformationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("LeaveDay")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("LeaveEnd")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("LeaveStart")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Proof")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("RequestTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StudentUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WorkId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LeaveInformationId");
-
-                    b.HasIndex("StudentUserId");
-
-                    b.HasIndex("WorkId");
-
-                    b.ToTable("LeaveInformation");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Like", b =>
                 {
                     b.Property<int>("WorkId")
@@ -183,42 +100,6 @@ namespace SyaBackend.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Likes");
-                });
-
-            modelBuilder.Entity("SyaBackend.Models.MessageLibrary", b =>
-                {
-                    b.Property<int>("MessageLibraryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ContentType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MessageType")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReceiverUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SenderUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("MessageLibraryId");
-
-                    b.HasIndex("ReceiverUserId");
-
-                    b.HasIndex("SenderUserId");
-
-                    b.ToTable("MessageLibraries");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Resume", b =>
@@ -382,30 +263,6 @@ namespace SyaBackend.Migrations
                     b.ToTable("Works");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.Announcement", b =>
-                {
-                    b.HasOne("SyaBackend.Models.User", "User")
-                        .WithMany("Announcements")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SyaBackend.Models.AnnouncementSend", b =>
-                {
-                    b.HasOne("SyaBackend.Models.Announcement", null)
-                        .WithMany("AnnouncementSends")
-                        .HasForeignKey("AnnouncementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SyaBackend.Models.User", null)
-                        .WithMany("AnnouncementSends")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Apply", b =>
                 {
                     b.HasOne("SyaBackend.Models.Resume", "Resume")
@@ -457,21 +314,6 @@ namespace SyaBackend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.LeaveInformation", b =>
-                {
-                    b.HasOne("SyaBackend.Models.User", "Student")
-                        .WithMany("LeaveInformation")
-                        .HasForeignKey("StudentUserId");
-
-                    b.HasOne("SyaBackend.Models.Work", "Work")
-                        .WithMany("LeaveInformation")
-                        .HasForeignKey("WorkId");
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Work");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Like", b =>
                 {
                     b.HasOne("SyaBackend.Models.User", null)
@@ -485,21 +327,6 @@ namespace SyaBackend.Migrations
                         .HasForeignKey("WorkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SyaBackend.Models.MessageLibrary", b =>
-                {
-                    b.HasOne("SyaBackend.Models.User", "Receiver")
-                        .WithMany("ReceiverMessageLibraries")
-                        .HasForeignKey("ReceiverUserId");
-
-                    b.HasOne("SyaBackend.Models.User", "Sender")
-                        .WithMany("SenderMessageLibraries")
-                        .HasForeignKey("SenderUserId");
-
-                    b.Navigation("Receiver");
-
-                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Resume", b =>
@@ -537,11 +364,6 @@ namespace SyaBackend.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("SyaBackend.Models.Announcement", b =>
-                {
-                    b.Navigation("AnnouncementSends");
-                });
-
             modelBuilder.Entity("SyaBackend.Models.Favorite", b =>
                 {
                     b.Navigation("FavoriteHasWorks");
@@ -554,21 +376,11 @@ namespace SyaBackend.Migrations
 
             modelBuilder.Entity("SyaBackend.Models.User", b =>
                 {
-                    b.Navigation("Announcements");
-
-                    b.Navigation("AnnouncementSends");
-
                     b.Navigation("Favorites");
-
-                    b.Navigation("LeaveInformation");
 
                     b.Navigation("Likes");
 
-                    b.Navigation("ReceiverMessageLibraries");
-
                     b.Navigation("Resume");
-
-                    b.Navigation("SenderMessageLibraries");
 
                     b.Navigation("StudentApplies");
 
@@ -584,8 +396,6 @@ namespace SyaBackend.Migrations
                     b.Navigation("Applies");
 
                     b.Navigation("FavoriteHasWorks");
-
-                    b.Navigation("LeaveInformation");
 
                     b.Navigation("Likes");
 

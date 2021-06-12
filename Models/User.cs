@@ -46,6 +46,20 @@ namespace SyaBackend.Models
         public List<Apply> TeacherApplies { get; set; }
 
         [ForeignKey("StudentId")]
+        public List<Take> Takes { get; set; }
+
+        [ForeignKey("StudentId")]
         public List<Like> Likes { get; set; }
+
+        public List<LeaveInformation> LeaveInformation { get; set; }
+
+        public List<Announcement>  Announcements { get; set; }
+
+        public List<MessageLibrary> SenderMessageLibraries { get; set; }
+
+        public List<MessageLibrary> ReceiverMessageLibraries { get; set; }
+
+        [ForeignKey("ReceiverId")]
+        public List<AnnouncementSend> AnnouncementSends { get; set; }
     }
 }

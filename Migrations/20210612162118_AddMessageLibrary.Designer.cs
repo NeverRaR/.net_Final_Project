@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SyaBackend;
 
 namespace SyaBackend.Migrations
 {
     [DbContext(typeof(SyaDbContext))]
-    partial class SyaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210612162118_AddMessageLibrary")]
+    partial class AddMessageLibrary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,9 +66,6 @@ namespace SyaBackend.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<int?>("StudentUserId")
@@ -191,26 +190,11 @@ namespace SyaBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Content")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("ContentType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MessageType")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ReceiverUserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SenderUserId")
                         .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime(6)");
 
                     b.HasKey("MessageLibraryId");
 
