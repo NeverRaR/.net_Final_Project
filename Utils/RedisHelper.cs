@@ -33,7 +33,7 @@ namespace SyaBackend.Utils
         {
             var userList = users.Where(x => x.Username == useranme);
             if (userList.Count() == 0) return null;
-            User user = users.First();
+            User user = userList.First();
             String passwordHashed = HashHelper.ComputeSHA256Hash(password + user.Salt);
             if (!user.Password.Equals(passwordHashed)) return null;
 

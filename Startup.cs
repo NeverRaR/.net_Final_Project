@@ -33,7 +33,7 @@ namespace SyaBackend
             string _connectionString = section.GetSection("Connection").Value;//连接字符串
             string _instanceName = section.GetSection("InstanceName").Value; //实例名称
             int _defaultDB = int.Parse(section.GetSection("DefaultDB").Value ?? "0"); //默认数据库
-            services.AddSingleton(new Utils.RedisClient(_connectionString, _instanceName, _defaultDB));
+            services.AddSingleton(new Services.RedisClient(_connectionString, _instanceName, _defaultDB));
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = new UnderScoreCaseConverter();//使用小驼峰格式序列化

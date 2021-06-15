@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace SyaBackend.Utils
+namespace SyaBackend.Services
 {
     public class RedisClient
     {
