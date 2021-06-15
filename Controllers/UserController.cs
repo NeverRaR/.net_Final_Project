@@ -30,7 +30,7 @@ namespace SyaBackend.Controllers
         public Object GetUserInfo()
         {
             User user = RedisHelper.GetUser(Request, _dataBase.Users, _redis);
-            if (user == null) return new ErrorInfo("sessionId is invalid!");
+            if (user == null)  return new ErrorInfo("sessionId is invalid!");
             return null;
         }
 

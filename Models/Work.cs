@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SyaBackend.Models
 {
+    [Table("work")]
     public class Work
     {
         [Key]

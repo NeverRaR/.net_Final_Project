@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SyaBackend.Models
 {
+    [Table("announcement")]
     public class Announcement
     {
-
         public int AnnouncementId { get; set; }
 
         public User User { get; set; }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SyaBackend.Models
 {
+    [Table("favorite")]
     public class Favorite
     {
         [Key]

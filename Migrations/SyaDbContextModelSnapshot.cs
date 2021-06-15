@@ -39,7 +39,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Announcement");
+                    b.ToTable("announcement");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.AnnouncementSend", b =>
@@ -54,7 +54,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("ReceiverId");
 
-                    b.ToTable("AnnouncementSend");
+                    b.ToTable("announcement_send");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Apply", b =>
@@ -88,7 +88,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("WorkId");
 
-                    b.ToTable("Applies");
+                    b.ToTable("apply");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Favorite", b =>
@@ -107,7 +107,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("favorite");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.FavoriteHasWork", b =>
@@ -125,7 +125,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("FavoriteId");
 
-                    b.ToTable("FavoriteHasWorks");
+                    b.ToTable("favorite_has_work");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.LeaveInformation", b =>
@@ -167,7 +167,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("WorkId");
 
-                    b.ToTable("LeaveInformation");
+                    b.ToTable("leave_information");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Like", b =>
@@ -182,7 +182,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Likes");
+                    b.ToTable("work_like");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.MessageLibrary", b =>
@@ -218,7 +218,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("SenderUserId");
 
-                    b.ToTable("MessageLibraries");
+                    b.ToTable("message_library");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Resume", b =>
@@ -262,7 +262,7 @@ namespace SyaBackend.Migrations
                     b.HasIndex("StudentId")
                         .IsUnique();
 
-                    b.ToTable("Resumes");
+                    b.ToTable("resume");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Take", b =>
@@ -289,7 +289,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Takes");
+                    b.ToTable("takes");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.User", b =>
@@ -333,7 +333,7 @@ namespace SyaBackend.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users");
+                    b.ToTable("user");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Work", b =>
@@ -379,7 +379,7 @@ namespace SyaBackend.Migrations
 
                     b.HasIndex("TeacherUserId");
 
-                    b.ToTable("Works");
+                    b.ToTable("work");
                 });
 
             modelBuilder.Entity("SyaBackend.Models.Announcement", b =>
