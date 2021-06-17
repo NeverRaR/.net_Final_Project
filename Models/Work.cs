@@ -47,5 +47,45 @@ namespace SyaBackend.Models
         public List<Apply> Applies { get; set; }
 
         public List<LeaveInformation> LeaveInformation { get; set; }
+
+        public double GetTotalTime()
+        {
+            double totalHour = 0.0;
+            int totalDay = 0;
+            int totalWeek = 0;
+            try
+            {
+                String[] startTimes = StartTime.Split(":");
+                String[] endTimes = EndTime.Split(":");
+                if (startTimes.Length != endTimes.Length)
+                {
+                    return 0;
+                }
+                if (startTimes.Length == 0 || startTimes.Length > 3)
+                {
+                    return 0;
+                }
+                int i;
+                double rate = 1.0;
+                for (i = 0; i < startTimes.Length; ++i)
+                {
+                    totalHour += (Double.Parse(endTimes[i]) - Double.Parse(startTimes[i])) * rate;
+                    rate /= 60;
+                }
+
+                String[] startDays = StartDay.Split("-");
+                String[] endDays = EndDay.Split("-");
+                totalDay += (int.Parse(endDays[0]) - int.Parse(startDays[0])) * 365;
+                totalDay += (int.Parse(endDays[1]) - int.Parse(startDays[1])) * 30;
+                totalDay += int.Parse(endDays[2]) - int.Parse(startDays[2]);
+                totalWeek = 1 + totalDay / 7;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message + "\n" + e.StackTrace);
+                return 0;
+            }
+            return totalWeek * totalHour;
+        }
     }
 }

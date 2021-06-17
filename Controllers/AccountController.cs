@@ -46,7 +46,7 @@ namespace SyaBackend.Controllers
             user.Password= HashHelper.ComputeSHA256Hash(request.Password + user.Salt);
             user.Email = request.Email;
             user.Role = request.Role;
-            user.Registered = new DateTime();
+            user.Registered = DateTime.Now;
             _dataBase.Users.Add(user);
             _dataBase.SaveChanges();
             accountStatus.SetUser(user);
