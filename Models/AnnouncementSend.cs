@@ -13,5 +13,7 @@ namespace SyaBackend.Models
 
 
         public int ReceiverId { get; set; }
+
+        public int Status { get; set; }
     }
 }

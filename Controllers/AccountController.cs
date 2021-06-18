@@ -60,7 +60,11 @@ namespace SyaBackend.Controllers
         {
             AccountStatus accountStatus = new AccountStatus();
             String sessionId = RedisHelper.CreateSessionId(request.Username, request.Password, _dataBase.Users, _redis);
-            if (sessionId == null) return accountStatus;
+            if (sessionId == null)
+            {
+                Response.StatusCode = 401;
+                return accountStatus;
+            }
 
             var cookieOptions= new CookieOptions();
             cookieOptions.Path = "/";

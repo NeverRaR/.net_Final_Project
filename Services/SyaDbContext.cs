@@ -86,6 +86,10 @@ namespace SyaBackend
         public DbSet<LeaveInformation> LeaveInformation { get; set; }
 
         public DbSet<MessageLibrary> MessageLibraries { get; set; }
+
+        public DbSet<Announcement> Announcements { get; set; }
+
+        public DbSet<AnnouncementSend> AnnouncementSends { get; set; }
     }
 }
 
