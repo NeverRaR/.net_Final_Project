@@ -287,6 +287,7 @@ namespace SyaBackend.Controllers
             {
                 return new ErrorView(-1, "Work isn't exist!");
             }
+            _dataBase.Entry(work).Reference(w => w.Teacher).Load();
             Take take = _dataBase.Takes.Find(work.WorkId, user.UserId);
             if (take == null)
             {

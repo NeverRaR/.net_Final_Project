@@ -34,11 +34,18 @@ namespace SyaBackend.Controllers
             {
                 return new ErrorInfo("You aren't student!");
             }
-            Resume resume = new Resume();
+            Resume resume = _dataBase.Resumes.Where(r => r.StudentId == user.UserId).SingleOrDefault();
+            ResumeInfo resumeInfo = new ResumeInfo();
+            if (resume!=null)
+            {
+                resumeInfo.SetResume(resume);
+                resumeInfo.StudentId = user.UserId;
+                return resumeInfo;
+            }
+            resume = new Resume();
             MakeResume(resume, body, user);
             _dataBase.Resumes.Add(resume);
             _dataBase.SaveChanges();
-            ResumeInfo resumeInfo = new ResumeInfo();
             resumeInfo.SetResume(resume);
             resumeInfo.StudentId = user.UserId;
             return resumeInfo;
