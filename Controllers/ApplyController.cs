@@ -151,7 +151,8 @@ namespace SyaBackend.Controllers
                 _dataBase.Entry(apply).Reference(a => a.Resume).Load();
                 applyInfoList.AddLast(new ApplyInfo(apply));
             }
-            applyInfoListByPage.ApplyInfoList = applyInfoList;
+            applyInfoListByPage.Applist = applyInfoList;
+
             return applyInfoListByPage;
         }
     }

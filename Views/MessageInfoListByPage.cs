@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace SyaBackend.Views
 {
-    public class ApplyInfoListByPage
+    public class MessageInfoListByPage
     {
-        public IEnumerable<ApplyInfo> Applist { get; set; }
-
         public int Totalpage { get; set; }
-
         public int Pagenum { get; set; }
+        public IEnumerable<MessageInfo> MessageItem { get; set; }
     }
 }
