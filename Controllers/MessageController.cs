@@ -62,10 +62,6 @@ namespace SyaBackend.Controllers
             {
                 return new ErrorInfo("sessionId is invalid!");
             }
-            if (user.Role.Equals(1))
-            {
-                return new ErrorInfo("Student cannot create message!");
-            }
             MessageLibrary messageLibrary = _dataBase.MessageLibraries.Find(body.MessageId);
 
             if(messageLibrary==null|| messageLibrary.Status == 2)

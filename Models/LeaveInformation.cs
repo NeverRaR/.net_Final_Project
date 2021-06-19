@@ -34,5 +34,30 @@ namespace SyaBackend.Models
 
 
         public String LeaveEnd { get; set; }
+
+
+        public Double GetTotalTime()
+        {
+            double totalTime = 0.0;
+            try
+            {
+                String[] startTimes = LeaveStart.Split(":");
+                String[] endTimes = LeaveEnd.Split(":");
+                if (startTimes.Length != endTimes.Length) return 0;
+                if (startTimes.Length == 0 || startTimes.Length > 3) return 0;
+                int i;
+                double rate = 1.0;
+                for (i = 0; i < startTimes.Length; ++i)
+                {
+                    totalTime += (Double.Parse(endTimes[i]) - Double.Parse(startTimes[i])) * rate;
+                    rate /= 60;
+                }
+            }
+            catch (Exception e)
+            {               
+                return 0;
+            }
+            return totalTime;
+        }
     }
 }
