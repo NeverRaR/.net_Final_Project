@@ -297,11 +297,15 @@ namespace SyaBackend.Controllers
             take.Status = 1;
             _dataBase.Takes.Update(take);
 
-            Apply apply = _dataBase.Applies.Find(work.WorkId, user.UserId);
+            Apply apply = _dataBase.Applies.Where(a => a.Work.WorkId == work.WorkId && a.Student.UserId == user.UserId).SingleOrDefault();
 
             if(apply != null)
             {
                 _dataBase.Applies.Remove(apply);
+            } 
+            else
+            {
+                return 0;
             }
 
             MessageLibrary messageResign = new MessageLibrary();
@@ -368,6 +372,7 @@ namespace SyaBackend.Controllers
 
             return workStatusListByPage;
         }
+
         private WorkStatus GetWorkStatus(Work work)
         {
             WorkStatus workStatus = new WorkStatus();
@@ -386,7 +391,7 @@ namespace SyaBackend.Controllers
             workStatus.WeekDay = work.WeekDay;
             workStatus.WorkName = work.Name;
             workStatus.WorkDescription = work.Description;
-            workStatus.Id = work.WorkId;
+            workStatus.WorkId = work.WorkId;
 
             workStatus.CollectNum = _dataBase.FavoriteHasWorks.Where(f => f.WorkId == work.WorkId).Count();
             workStatus.LikesNum = _dataBase.Likes.Where(l => l.WorkId == work.WorkId).Count();

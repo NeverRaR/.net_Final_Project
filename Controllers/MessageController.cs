@@ -159,7 +159,8 @@ namespace SyaBackend.Controllers
             LinkedList<MessageInfo> messageInfoList = new LinkedList<MessageInfo>();
             foreach (var message in messageListByPage)
             {
-
+                _dataBase.Entry(message).Reference(m => m.Sender).Load();
+                _dataBase.Entry(message).Reference(m => m.Receiver).Load();
                 messageInfoList.AddLast(new MessageInfo(message));
             }
             messageInfoListByPage.MessageItem = messageInfoList;

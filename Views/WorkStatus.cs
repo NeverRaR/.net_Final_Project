@@ -7,7 +7,7 @@ namespace SyaBackend.Views
 {
     public class WorkStatus
     {
-        public int Id { get; set; }
+        public int WorkId { get; set; }
 
         public String WorkName { get; set; }
 
