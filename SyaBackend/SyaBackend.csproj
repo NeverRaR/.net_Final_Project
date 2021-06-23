@@ -16,5 +16,9 @@
     <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CLRLogger\CLRLogger.vcxproj" />
+  </ItemGroup>
+
 
 </Project>

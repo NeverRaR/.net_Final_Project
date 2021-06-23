@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyaBackend", "SyaBackend\Sy
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SYAWin32DLL", "SYAWin32DLL\SYAWin32DLL.vcxproj", "{7478AF10-132D-48AD-8DA4-C17E6A319CA6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CLRLogger", "CLRLogger\CLRLogger.vcxproj", "{872B86DE-3A3C-4001-8B32-168F7D5B0A45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,16 @@ Global
 		{7478AF10-132D-48AD-8DA4-C17E6A319CA6}.Release|x64.Build.0 = Release|x64
 		{7478AF10-132D-48AD-8DA4-C17E6A319CA6}.Release|x86.ActiveCfg = Release|Win32
 		{7478AF10-132D-48AD-8DA4-C17E6A319CA6}.Release|x86.Build.0 = Release|Win32
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Debug|x64.ActiveCfg = Debug|x64
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Debug|x64.Build.0 = Debug|x64
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Debug|x86.ActiveCfg = Debug|Win32
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Debug|x86.Build.0 = Debug|Win32
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Release|Any CPU.ActiveCfg = Release|Win32
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Release|x64.ActiveCfg = Release|x64
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Release|x64.Build.0 = Release|x64
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Release|x86.ActiveCfg = Release|Win32
+		{872B86DE-3A3C-4001-8B32-168F7D5B0A45}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
