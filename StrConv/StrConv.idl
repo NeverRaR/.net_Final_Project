@@ -1,0 +1,37 @@
+﻿// StrConv.idl: StrConv 的 IDL 源
+//
+
+// 此文件将由 MIDL 工具处理以
+// 生成类型库(StrConv.tlb)和封送处理代码。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(d5625f80-dadb-4261-81de-5f1bd3afa1cd),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IUnderScoreCase : IDispatch
+{
+	[id(1)] HRESULT Convert([in] BSTR name, [out, retval] BSTR* retVal);
+};
+[
+	uuid(fbd8cc6d-3fc8-4e85-9c03-9fb2e065d0ea),
+	version(1.0),
+]
+library StrConvLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(3bc5c63c-ee60-4176-ada8-bcf253f5e6f9)
+	]
+	coclass UnderScoreCase
+	{
+		[default] interface IUnderScoreCase;
+	};
+};
+
+import "shobjidl.idl";

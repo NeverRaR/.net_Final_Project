@@ -1,0 +1,26 @@
+HKCR
+{
+	SyaStrLib.UnderScoreCase.1 = s 'UnderScoreCase class'
+	{
+		CLSID = s '{3bc5c63c-ee60-4176-ada8-bcf253f5e6f9}'
+	}
+	SyaStrLib.UnderScoreCase = s 'UnderScoreCase class'
+	{		
+		CurVer = s 'SyaStrLib.UnderScoreCase.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {3bc5c63c-ee60-4176-ada8-bcf253f5e6f9} = s 'UnderScoreCase class'
+		{
+			ProgID = s 'SyaStrLib.UnderScoreCase.1'
+			VersionIndependentProgID = s 'SyaStrLib.UnderScoreCase'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{fbd8cc6d-3fc8-4e85-9c03-9fb2e065d0ea}'
+			Version = s '1.0'
+		}
+	}
+}
