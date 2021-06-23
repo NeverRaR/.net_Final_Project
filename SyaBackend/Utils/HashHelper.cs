@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,9 @@ namespace SyaBackend.Utils
 {
     public class HashHelper
     {
-        private static char[] hexDigits = {
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
-            'e', 'f' };
+
+        [DllImport(@"D:\VSProject\SyaBackend\x64\Debug\SYAWin32DLL.dll")]
+        private static extern char Encode(int code);
 
         public static String ComputeSHA256Hash(String rawData)
         {
@@ -23,7 +24,11 @@ namespace SyaBackend.Utils
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < retVal.Length; i++)
                 {
-                    sb.Append(retVal[i].ToString("x2"));
+                    byte byte0 = retVal[i];
+                    char ch1 = Encode((byte0 >> 4) & 0xf);
+                    char ch2 = Encode(byte0 & 0xf);
+                    sb.Append(ch1);
+                    sb.Append(ch2);
                 }
                 return sb.ToString();
             }
@@ -43,7 +48,12 @@ namespace SyaBackend.Utils
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < retVal.Length; i++)
                 {
-                    sb.Append(retVal[i].ToString("x2"));
+                    byte byte0 = retVal[i];
+                    char ch1 = Encode((byte0 >> 4) & 0xf);
+                    char ch2 = Encode(byte0  & 0xf);
+                    sb.Append(ch1);
+                    sb.Append(ch2);
+
                 }
                 return sb.ToString();
             }
