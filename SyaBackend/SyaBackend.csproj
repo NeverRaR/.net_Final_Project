@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>7332af27-1f13-4620-aaf4-05df9bd53ede</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -39,6 +40,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CLRLogger\CLRLogger.vcxproj" />
+    <ProjectReference Include="..\SYASharedDateHelper\SYASharedDateHelper.csproj" />
   </ItemGroup>
 
 

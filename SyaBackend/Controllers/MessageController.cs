@@ -66,7 +66,7 @@ namespace SyaBackend.Controllers
             info.UserPassword = _mailPassword;
             info.MailTo = receiver.Email;
             info.MailSubject = "SYA System:you have a new message!";
-            info.MailContent = "dear " + receiver.Username + ",you receive a new message from teacher " + user.Username + ",please check it in SYA system!";
+            info.MailContent = "Dear " + receiver.Username + ",you receive a new message from teacher " + user.Username + ",please check it in SYA system!";
 
             //AsynMailHelper.Execute(info);
            ThreadPool.QueueUserWorkItem(AsynMailHelper.Execute,info);
