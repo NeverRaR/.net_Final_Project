@@ -11,7 +11,7 @@ namespace SyaBackend.Utils
     public class HashHelper
     {
 
-        [DllImport(@"D:\VSProject\SyaBackend\x64\Debug\SYAWin32DLL.dll")]
+        [DllImport(@"D:\VSProject\SyaBackend\SyaBackend\Libs\SYAWin32DLL.dll")]
         private static extern char Encode(int code);
 
         public static String ComputeSHA256Hash(String rawData)
