@@ -10,6 +10,8 @@ using SyaBackend.Requests;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 namespace SyaBackend.Controllers
 {
@@ -20,11 +22,18 @@ namespace SyaBackend.Controllers
 
         private readonly SyaDbContext _dataBase;
         private readonly IDatabase _redis;
+        private readonly String _mailName;
+        private readonly String _mailPassword;
+        private readonly String _mailHost;
 
-        public MessageController(SyaDbContext context, RedisClient client)
+        public MessageController(SyaDbContext context, RedisClient client, IConfiguration configuration)
         {
             _dataBase = context;
             _redis = client.GetDatabase();
+            var section = configuration.GetSection("Mail");
+            _mailName = section.GetSection("Username").Value;
+            _mailPassword = section.GetSection("Password").Value;
+            _mailHost = section.GetSection("Host").Value;         
         }
 
         [HttpPost("CreateMessage")]
@@ -50,6 +59,17 @@ namespace SyaBackend.Controllers
             message.Time = DateTime.Now;
             _dataBase.MessageLibraries.Add(message);
             _dataBase.SaveChanges();
+
+            MailInfo info = new MailInfo();
+            info.SmtpServer = _mailHost;
+            info.MailFrom = _mailName;
+            info.UserPassword = _mailPassword;
+            info.MailTo = receiver.Email;
+            info.MailSubject = "SYA System:you have a new message!";
+            info.MailContent = "dear " + receiver.Username + ",you receive a new message from teacher " + user.Username + ",please check it in SYA system!";
+
+            //AsynMailHelper.Execute(info);
+           ThreadPool.QueueUserWorkItem(AsynMailHelper.Execute,info);
 
             return new MessageInfo(message);
         }

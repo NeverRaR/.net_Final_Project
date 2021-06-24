@@ -20,7 +20,6 @@ namespace SyaBackend.Services
 
         public override string ConvertName(string name)
         {
-            string str = _converter.Convert(name);
             return _converter.Convert(name);
             /*
              StringBuilder sb = new StringBuilder();

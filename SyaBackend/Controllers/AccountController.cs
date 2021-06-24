@@ -9,6 +9,7 @@ using SyaBackend.Views;
 using App.Metrics.Concurrency;
 using Microsoft.AspNetCore.Http;
 using SyaBackend.Services;
+using System.Threading;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -56,6 +57,7 @@ namespace SyaBackend.Controllers
         [HttpPost("Login")]
         public AccountStatus Login([FromBody] LoginDTO request)
         {
+
             AccountStatus accountStatus = new AccountStatus();
             String sessionId = RedisHelper.CreateSessionId(request.Username, request.Password, _dataBase.Users, _redis);
             if (sessionId == null)
@@ -63,7 +65,6 @@ namespace SyaBackend.Controllers
                 Response.StatusCode = 401;
                 return accountStatus;
             }
-
             var cookieOptions= new CookieOptions();
             cookieOptions.Path = "/";
             cookieOptions.HttpOnly = true;

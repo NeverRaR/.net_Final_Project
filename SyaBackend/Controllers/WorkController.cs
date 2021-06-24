@@ -10,6 +10,7 @@ using SyaBackend.Models;
 using SyaBackend.Requests;
 using SyaBackend.Utils;
 using SyaBackend.Views;
+using System.Threading;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -348,8 +349,10 @@ namespace SyaBackend.Controllers
             }
             _dataBase.Takes.Remove(take);
             _dataBase.SaveChanges();
+            
             return 1;
         }
+
 
         private WorkStatusListByPage GetWorkStatusListByPage(IEnumerable<TakeWithWork> takeWithWorkList,int pageNum,int pageSize)
         {
